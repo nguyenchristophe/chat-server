@@ -29,8 +29,14 @@ mongoose
     console.log("Error connecting to MongoDb", err);
   });
 
-app.listen(port, () => {
+/*app.listen(port, () => {
   console.log("Server running on port 8000");
+});*/
+
+app.use(express.static(path.join(__dirname, "client")));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/client/build', 'index.html'));
 });
 
 const User = require("./models/user");
